@@ -24,7 +24,8 @@
     "node_modules"
   ],
   "frameworks": {
-     "dnxcore50": { }
+    "dnx451": { },
+    "dnxcore50": { }
   },
   "publishExclude": [
     "**.user",

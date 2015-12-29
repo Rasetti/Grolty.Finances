@@ -28,9 +28,6 @@ namespace Web.Models
         public Category Category { get; set; }
 
         [Required]
-        public Currency Currency { get; set; }
-
-        [Required]
         public Period Period { get; set; }
 
         [Required]

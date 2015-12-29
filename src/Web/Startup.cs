@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,10 @@ namespace Web
             services.AddMvc();
 
             // Register Entity Framework
-            services.AddEntityFramework().AddSqlServer().AddDbContext<GroltyFinancesWebContext>();
+            services.AddEntityFramework().AddSqlServer().AddDbContext<GroltyFinancesWebContext>(options =>
+            {
+                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
