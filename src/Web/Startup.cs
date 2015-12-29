@@ -15,6 +15,7 @@ namespace Web
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -28,10 +29,9 @@ namespace Web
             services.AddMvc();
 
             // Register Entity Framework
-            services.AddEntityFramework().AddSqlServer().AddDbContext<GroltyFinancesWebContext>(options =>
-            {
-                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]);
-            });
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<GroltyFinancesWebContext>(options => { options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
