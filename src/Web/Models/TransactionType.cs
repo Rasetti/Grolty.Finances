@@ -5,7 +5,7 @@ namespace Web.Models
     public class TransactionType
     {
         [Key]
-        public int Id { get; set; }
+        public TransactionTypes Id { get; set; }
 
         [Required]
         [MaxLength(20)]

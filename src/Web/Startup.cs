@@ -45,6 +45,9 @@ namespace Web
             app.UseStaticFiles();
 
             app.UseMvc();
+
+            //var utils = new Utilities.Data();
+            //utils.InitialiseDatabase(env);
         }
 
         // Entry point for the application.

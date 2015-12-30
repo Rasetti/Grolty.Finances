@@ -8,8 +8,8 @@ using Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(GroltyFinancesWebContext))]
-    [Migration("20151229025235_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20151230024503_TransactionTypeEnum")]
+    partial class TransactionTypeEnum
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 200);
+                        .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("Id");
                 });
@@ -38,20 +38,19 @@ namespace Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 30);
-
-                    b.Property<int?>("TransactionTypeId")
-                        .IsRequired();
+                        .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("Id");
                 });
 
             modelBuilder.Entity("Web.Models.Currency", b =>
                 {
-                    b.Property<string>("Code");
+                    b.Property<string>("Code")
+                        .HasAnnotation("MaxLength", 3);
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Code");
                 });
@@ -75,9 +74,6 @@ namespace Web.Migrations
                     b.Property<decimal>("Amount");
 
                     b.Property<int?>("CategoryId")
-                        .IsRequired();
-
-                    b.Property<string>("CurrencyCode")
                         .IsRequired();
 
                     b.Property<DateTime>("Date");
@@ -109,13 +105,6 @@ namespace Web.Migrations
                     b.HasKey("Id");
                 });
 
-            modelBuilder.Entity("Web.Models.Category", b =>
-                {
-                    b.HasOne("Web.Models.TransactionType")
-                        .WithMany()
-                        .HasForeignKey("TransactionTypeId");
-                });
-
             modelBuilder.Entity("Web.Models.Transaction", b =>
                 {
                     b.HasOne("Web.Models.AccountSource")
@@ -125,10 +114,6 @@ namespace Web.Migrations
                     b.HasOne("Web.Models.Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
-
-                    b.HasOne("Web.Models.Currency")
-                        .WithMany()
-                        .HasForeignKey("CurrencyCode");
 
                     b.HasOne("Web.Models.Period")
                         .WithMany()

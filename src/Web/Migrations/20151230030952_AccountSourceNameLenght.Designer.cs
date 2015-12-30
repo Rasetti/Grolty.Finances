@@ -8,9 +8,10 @@ using Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(GroltyFinancesWebContext))]
-    partial class GroltyFinancesWebContextModelSnapshot : ModelSnapshot
+    [Migration("20151230030952_AccountSourceNameLenght")]
+    partial class AccountSourceNameLenght
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

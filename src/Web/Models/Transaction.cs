@@ -13,9 +13,11 @@ namespace Web.Models
         public string Description { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue)]
         public decimal Amount { get; set; }
 
         [Required]
+        [Range(0.01, Double.MaxValue)]
         public decimal SourceAmount { get; set; }
 
         [Required]

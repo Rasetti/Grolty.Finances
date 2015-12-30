@@ -7,8 +7,16 @@ using Web.Models;
 namespace Web.Controllers
 {
     [Route("api/[controller]")]
-    public class TransactionController : BaseController
+    public class TransactionsController : Controller
     {
+        public TransactionsController(GroltyFinancesWebContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
+        [FromServices]
+        private GroltyFinancesWebContext DbContext { get; }
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<Transaction> Get()
