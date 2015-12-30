@@ -7,19 +7,13 @@ using Web.Models;
 namespace Web.Controllers
 {
     [Route("api/[controller]")]
-    public class TransactionController : Controller
+    public class TransactionController : BaseController
     {
         // GET: api/values
         [HttpGet]
         public IEnumerable<Transaction> Get()
         {
-            return new List<Transaction>
-            {
-                new Transaction(),
-                new Transaction(),
-                new Transaction(),
-                new Transaction()
-            };
+            return DbContext.Transactions;
         }
 
         // GET api/values/5

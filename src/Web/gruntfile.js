@@ -5,18 +5,29 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkID=513275&clcid=0x
 module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-watch");
-
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.registerTask("all", ["clean", "jshint", "uglify"]);
     grunt.initConfig({
+        clean: ["wwwroot/lib/*"],
+
         uglify: {
             my_target: {
                 files: { 'wwwroot/app.js': ["Scripts/app.js", "Scripts/**/*.js"] }
             }
         },
 
+        jshint: {
+            files: ["Scripts/*.js"],
+            options: {
+                '-W069': false
+            }
+        },
+
         watch: {
             scripts: {
                 files: ["Scripts/**/*.js"],
-                tasks: ["uglify"]
+                tasks: ["all"]
             }
         }
     });
