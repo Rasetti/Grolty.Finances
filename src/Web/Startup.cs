@@ -46,8 +46,8 @@ namespace Web
 
             app.UseMvc();
 
-            //var utils = new Utilities.Data();
-            //utils.InitialiseDatabase(env);
+            var utils = new Utilities.Data();
+            utils.InitialiseDatabase(env, app);
         }
 
         // Entry point for the application.

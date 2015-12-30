@@ -37,7 +37,7 @@ namespace Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 20);
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Id");
                 });

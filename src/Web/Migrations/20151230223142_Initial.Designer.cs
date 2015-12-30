@@ -8,8 +8,8 @@ using Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(GroltyFinancesWebContext))]
-    [Migration("20151230024503_TransactionTypeEnum")]
-    partial class TransactionTypeEnum
+    [Migration("20151230223142_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 20);
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Id");
                 });
@@ -38,7 +38,7 @@ namespace Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 20);
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Id");
                 });
@@ -95,8 +95,7 @@ namespace Web.Migrations
 
             modelBuilder.Entity("Web.Models.TransactionType", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
