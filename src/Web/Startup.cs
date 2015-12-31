@@ -40,11 +40,14 @@ namespace Web
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseIISPlatformHandler();
-
             app.UseStaticFiles();
-
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
 
             var utils = new Utilities.Data();
             utils.InitialiseDatabase(env, app);
