@@ -11,11 +11,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         clean: ["wwwroot/lib/*"],
 
-        uglify: {
-            my_target: {
-                files: { 'wwwroot/app.js': ["Scripts/app.js", "Scripts/**/*.js"] }
-            }
-        },
+        //uglify: {
+        //    my_target: {
+        //        files: { 'wwwroot/app.js': ["Scripts/app.js", "Scripts/**/*.js"] }
+        //    }
+        //},
 
         jshint: {
             files: ["Scripts/*.js"],

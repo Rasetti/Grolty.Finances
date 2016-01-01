@@ -10,14 +10,16 @@
     function transationsController($location, transactionService) {
         /* jshint validthis:true */
         var vm = this;
-        vm.title = "transationsController";
-        vm.transactions = [];
+        vm.model = {
+            transactions:  []
+                };
 
+        
         activate();
 
         function activate()
         {
-            vm.transactions = transactionService.getTransactions();
+            vm.model.transactions = transactionService.getTransactions();
         }
     }
 })();
