@@ -5,27 +5,22 @@
         (
             "Grolty.Finances",
             [
-                // Angular modules 
-                "ngRoute",
                 "ngResource",
-                "ui.router"
+                "ui.router",
+                "Grolty.Finances.Transactions"
             ]
         )
         .config(
         [
-            "$provide", "$httpProvider", "$stateProvider", "$urlRouterProvider",
-            function($provide, $httpProvider, $stateProvider, $urlRouterProvider)
+            "$stateProvider", "$urlRouterProvider",
+            function ($stateProvider, $urlRouterProvider)
             {
-                //!Route!
                 $urlRouterProvider.otherwise("/");
-                $stateProvider
-                    .state("home", {
-                        templateUrl: "transactions.html",
-                        url: "/",
-                        controller: "transactionsController",
-                        controllerAs: "vm",
-                        params: {}
-                    });
+                $stateProvider.state({
+                    name: "Grolty.Finances.Transactions",
+                    url: "/transactions",
+                    abstract: true
+                });
             }
         ]);
 })();

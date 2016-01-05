@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    angular.module("Grolty.Finances")
+    angular.module("Grolty.Finances.Transactions")
         .factory("TransactionsService", transactionsService);
       
     transactionsService.$inject = ["$resource"];
@@ -17,8 +17,8 @@
         function getTransactions()
         {
             var transactions = $resource("/api/transactions");
-            transactions.get().$promise.then(function (response) {
-                service.transactions = response.data.transactions;
+            transactions.query().$promise.then(function (response) {
+                service.transactions = response;
             });
         }
 

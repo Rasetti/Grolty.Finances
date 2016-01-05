@@ -1,21 +1,29 @@
-﻿<!DOCTYPE html>
-
+﻿@addTagHelper "*, Microsoft.AspNet.Mvc.TagHelpers"
+<!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Transactions</title>
-    <script src="~/lib/angular/angular.js"></script>
-    <script src="~/lib/angular-resource/angular-resource.js"></script>
-    <script src="~/lib/angular-route/angular-route.js"></script>
-    <script src="~/app/app.js"></script>
-    <script src="~/app/services/transactions.js"></script>
-    <script src="~/app/controllers/"></script>
-</head>
-<body ng-app>
-
-<div ui-view>
-
-</div>
-
-</body>
+    <head>
+        <title></title>
+        <meta charset="utf-8" content="width=device-width"/>
+        <environment names="Development">
+            <script src="~/lib/angular/angular.js"></script>
+            <script src="~/lib/angular-resource/angular-resource.js"></script>
+            @*<script src="~/lib/angular-route/angular-route.js"></script>*@
+            <script src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
+            <script src="~/lib/angular-bootstrap/ui-bootstrap.js"></script>
+            <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+            <script asp-src-include="~/app/**/*.js"></script>
+        </environment>
+        <environment names="Production">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" asp-fallback-src="~/lib/angular/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js" asp-fallback-src="~/lib/angular-resource/angular-resource.min.js"></script>
+         @*   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js" asp-fallback-src="~/lib/angular-route/angular-route.min.js"></script>*@
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js" asp-fallback-src="~/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js" asp-fallback-src="~/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js" asp-fallback-src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
+        </environment>
+    </head>
+    <body ng-app="Grolty.Finances" ng-strict-di>
+        <div ui-view>
+        </div>
+    </body>
 </html>

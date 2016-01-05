@@ -5,9 +5,7 @@ namespace Web.Models
     public class GroltyFinancesWebContext : DbContext
     {
         public DbSet<TransactionType> TransactionTypes { get; set; }
-
-        public DbSet<AccountSource> AccountSources { get; set; }
-
+        
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Period> Periods { get; set; }

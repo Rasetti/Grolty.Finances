@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.ChangeTracking;
 using Microsoft.Extensions.DependencyInjection;
 using Web.Models;
 
@@ -19,35 +20,20 @@ namespace Web.Utilities
                 dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
 
-                if (!dbContext.TransactionTypes.Any(x => x.Id == TransactionTypes.Expense))
-                    dbContext.TransactionTypes.Add(new TransactionType {Id = TransactionTypes.Expense, Name = Enum.GetName(typeof (TransactionTypes), TransactionTypes.Expense)});
+                var expense = new TransactionType {Id = TransactionTypes.Expense, Name = Enum.GetName(typeof (TransactionTypes), TransactionTypes.Expense)};
+                if (!dbContext.TransactionTypes.Any(x => x.Id == expense.Id))
+                    dbContext.TransactionTypes.Add(expense);
 
-                if (!dbContext.TransactionTypes.Any(x => x.Id == TransactionTypes.Income))
-                    dbContext.TransactionTypes.Add(new TransactionType {Id = TransactionTypes.Income, Name = Enum.GetName(typeof (TransactionTypes), TransactionTypes.Income)});
+                var income = new TransactionType {Id = TransactionTypes.Income, Name = Enum.GetName(typeof (TransactionTypes), TransactionTypes.Income)};
+                if (!dbContext.TransactionTypes.Any(x => x.Id == income.Id))
+                    dbContext.TransactionTypes.Add(income);
 
-                if (!dbContext.AccountSources.Any(x => x.Name == "ANZ Visa"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "ANZ Visa", IsActive = true});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "Juampi ASB"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "Juampi ASB", IsActive = false});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "Mad ASB"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "Mad ASB", IsActive = false});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "Cash"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "Cash", IsActive = true});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "ANZ Grolty Trust Fund"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "ANZ Grolty Trust Fund", IsActive = false});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "ANZ Freedom"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "ANZ Freedom", IsActive = true});
-
-                if (!dbContext.AccountSources.Any(x => x.Name == "ANZ Grolthar cash stash"))
-                    dbContext.AccountSources.Add(new AccountSource {Name = "ANZ Grolthar cash stash", IsActive = false});
-
-                if (!dbContext.Categories.Any(x => x.Name == "Car"))
-                    dbContext.Categories.Add(new Category {Name = "Car"});
+                EntityEntry<Category> c = null;
+                var categoryCar = new Category {Name = "Car"};
+                if (!dbContext.Categories.Any(x => x.Name == categoryCar.Name))
+                {
+                    c = dbContext.Categories.Add(categoryCar);
+                }
 
                 if (!dbContext.Categories.Any(x => x.Name == "Clothing"))
                     dbContext.Categories.Add(new Category {Name = "Clothing"});
@@ -105,6 +91,29 @@ namespace Web.Utilities
 
                 if (!dbContext.Categories.Any(x => x.Name == "Move to Argentina"))
                     dbContext.Categories.Add(new Category {Name = "Move to Argentina"});
+
+                var currencyNzd = new Currency {Code = "NZD"};
+                if (!dbContext.Currencies.Any(x => x.Code == currencyNzd.Code))
+                    dbContext.Currencies.Add(currencyNzd);
+
+                EntityEntry<Period> p = null;
+                var period1 = new Period {Id = "201512"};
+                if (!dbContext.Periods.Any(x => x.Id == period1.Id))
+                    p = dbContext.Periods.Add(period1);
+
+                if (!dbContext.Transactions.Any())
+                {
+                    dbContext.Transactions.Add(new Transaction
+                    {
+                        Period = p.Entity,
+                        Amount = (decimal) 10.01,
+                        Category = c.Entity,
+                        Date = DateTime.Now,
+                        Description = "Test 1",
+                        TransactionType = expense,
+                        Currency = currencyNzd
+                    });
+                }
 
                 dbContext.SaveChanges();
             }

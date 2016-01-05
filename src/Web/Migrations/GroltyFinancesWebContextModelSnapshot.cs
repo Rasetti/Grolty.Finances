@@ -16,20 +16,6 @@ namespace Web.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Web.Models.AccountSource", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 50);
-
-                    b.HasKey("Id");
-                });
-
             modelBuilder.Entity("Web.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -44,20 +30,14 @@ namespace Web.Migrations
 
             modelBuilder.Entity("Web.Models.Currency", b =>
                 {
-                    b.Property<string>("Code")
-                        .HasAnnotation("MaxLength", 3);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 50);
+                    b.Property<string>("Code");
 
                     b.HasKey("Code");
                 });
 
             modelBuilder.Entity("Web.Models.Period", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.HasKey("Id");
                 });
@@ -67,13 +47,12 @@ namespace Web.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AccountSourceId")
-                        .IsRequired();
-
                     b.Property<decimal>("Amount");
 
                     b.Property<int?>("CategoryId")
                         .IsRequired();
+
+                    b.Property<string>("CurrencyCode");
 
                     b.Property<DateTime>("Date");
 
@@ -81,10 +60,8 @@ namespace Web.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);
 
-                    b.Property<int?>("PeriodId")
+                    b.Property<string>("PeriodId")
                         .IsRequired();
-
-                    b.Property<decimal>("SourceAmount");
 
                     b.Property<int?>("TransactionTypeId")
                         .IsRequired();
@@ -105,13 +82,13 @@ namespace Web.Migrations
 
             modelBuilder.Entity("Web.Models.Transaction", b =>
                 {
-                    b.HasOne("Web.Models.AccountSource")
-                        .WithMany()
-                        .HasForeignKey("AccountSourceId");
-
                     b.HasOne("Web.Models.Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
+
+                    b.HasOne("Web.Models.Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyCode");
 
                     b.HasOne("Web.Models.Period")
                         .WithMany()

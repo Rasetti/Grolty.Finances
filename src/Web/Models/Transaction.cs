@@ -15,16 +15,9 @@ namespace Web.Models
         [Required]
         [Range(0.01, double.MaxValue)]
         public decimal Amount { get; set; }
-
-        [Required]
-        [Range(0.01, Double.MaxValue)]
-        public decimal SourceAmount { get; set; }
-
+      
         [Required]
         public DateTime Date { get; set; }
-
-        [Required]
-        public AccountSource AccountSource { get; set; }
 
         [Required]
         public Category Category { get; set; }
@@ -34,5 +27,7 @@ namespace Web.Models
 
         [Required]
         public TransactionType TransactionType { get; set; }
+
+        public Currency Currency { get; set; }
     }
 }
