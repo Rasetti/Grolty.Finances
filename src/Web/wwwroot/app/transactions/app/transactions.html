@@ -1,8 +1,8 @@
 ﻿<div>
-    {{ 1 + 1 + 1  }}
     <ul>
         <li ng-repeat="transaction in vm.model.transactions">
-            
+            <label>{{transaction.Description }}</label>
+            <label>{{transaction.Amount }}</label>
         </li>
     </ul>
 </div>

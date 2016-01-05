@@ -6,7 +6,7 @@
 
     transactionsController.$inject = ["$location", "TransactionsService"];
 
-    function transactionsController($location, transactionService) {
+    function transactionsController($location, transactionsService) {
         var vm = this;
         vm.model = {
             transactions:  []
@@ -17,7 +17,9 @@
 
         function activate()
         {
-            vm.model.transactions = transactionService.getTransactions();
+            transactionsService.getTransactions().then(function () {
+                vm.model.transactions = transactionsService.transactions;
+            });
         }
     }
 })();
