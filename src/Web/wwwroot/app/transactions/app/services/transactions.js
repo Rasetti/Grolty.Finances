@@ -17,7 +17,7 @@
         function getTransactions()
         {
             var transactions = $resource("/api/transactions");
-            transactions.query().$promise.then(function (response) {
+            return transactions.query().$promise.then(function (response) {
                 service.transactions = response;
             });
         }
